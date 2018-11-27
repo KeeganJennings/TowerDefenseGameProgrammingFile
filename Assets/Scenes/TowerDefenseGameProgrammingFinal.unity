@@ -679,8 +679,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickedTower: {fileID: 0}
-  startingBlock: {fileID: 1666998908539966, guid: 94adb0b8f24633c40bd9ce4ea77ef146,
-    type: 2}
+  startingBlock:
+  - {fileID: 1666998908539966, guid: 94adb0b8f24633c40bd9ce4ea77ef146, type: 2}
+  - {fileID: 1513038499038622, guid: 309a1a75caf2a2149bc9c72b1282b432, type: 2}
+  - {fileID: 1048996476117580, guid: 2a6a382d39d6f0346b845416c200abe6, type: 2}
+  - {fileID: 1032167709096570, guid: 934454775daf3a843b3a9c909dcc751c, type: 2}
+  - {fileID: 1371982053630550, guid: 30a6a54d3fe81954ab919d0aac7fd303, type: 2}
 --- !u!4 &1124947143
 Transform:
   m_ObjectHideFlags: 0

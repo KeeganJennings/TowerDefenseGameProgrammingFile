@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\TowerBaseManager.cs" />
     <Compile Include="Assets\Scripts\TowerBaseScript.cs" />
+    <None Include="Assets\Resources\LevelLayout.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Keegan Jennings/Documents/GitHub/TowerDefenseGameProgrammingFile/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
