@@ -31,6 +31,7 @@ public class TowerBaseScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Mouse was clicked");
+            clickedTower = TowerBaseManager.Instance.GetClickedTower();
             GameManager1.Instance.towerMenu.gameObject.SetActive(true);
 
         }
@@ -46,9 +47,9 @@ public class TowerBaseScript : MonoBehaviour
     private void ChangeToTower()
     {
         Debug.Log("Place a tower");
-        clickedTower = TowerBaseManager.Instance.GetClickedTower();
+        
         Instantiate(selectedTower, new Vector2(clickedTower.transform.position.x, clickedTower.transform.position.y), Quaternion.identity);
-        this.gameObject.SetActive(false);
+        clickedTower.SetActive(false);
         GameManager1.Instance.towerMenu.gameObject.SetActive(false);
     }
 }

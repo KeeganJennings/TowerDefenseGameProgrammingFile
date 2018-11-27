@@ -5,7 +5,7 @@ using UnityEngine;
 public class TowerBaseManager : Singleton<TowerBaseManager>
 {
     private List<GameObject> towerBases = new List<GameObject>();
-    public GameObject clickedTowerBase;
+    public GameObject clickedTower;
     [SerializeField]
     private GameObject startingBlock;
    
@@ -38,35 +38,25 @@ public class TowerBaseManager : Singleton<TowerBaseManager>
     // Update is called once per frame
     void Update ()
     {
-        
+
     }
 
     public GameObject GetClickedTower()
     {
-        Debug.Log("Inside Get Click Tower");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, -Vector2.up);
 
+        
         if (hit.collider != null)
         {
-            Debug.Log("Checkpoint 1");
             for (int i = 0; i < towerBases.Count; i++)
             {
-                Debug.Log("Checkpoint 2");
-                if (towerBases[i].transform.position.x == hit.transform.position.x)
+                if (towerBases[i].transform.position.x == hit.transform.position.x && towerBases[i].transform.position.y == hit.transform.position.y)
                 {
-                    if(towerBases[i].transform.position.y == hit.transform.position.y)
-                    {
-                        clickedTowerBase = towerBases[i];
-                        Debug.Log("Tower was set at X: " + clickedTowerBase.transform.position.x + " Y: " + clickedTowerBase.transform.position.y);
-                        if(clickedTowerBase != null)
-                        {
-                            Debug.Log("Click Tower Base is set");
-                        }
-                    }
+                    clickedTower = towerBases[i];
                 }
             }
         }
-        return clickedTowerBase;
+        return clickedTower;
     }
 }
