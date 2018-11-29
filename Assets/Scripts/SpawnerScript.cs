@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnerScript : Singleton<SpawnerScript>
 {
-    private List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> enemies = new List<GameObject>();
     private float numberOfEnemiesToSpawn = 15;
 
     public GameObject spawnBlock;
@@ -20,7 +20,7 @@ public class SpawnerScript : Singleton<SpawnerScript>
 	void Update ()
     {
 
-        SpawnDelay();
+        
 
     }
 
@@ -34,6 +34,7 @@ public class SpawnerScript : Singleton<SpawnerScript>
         {
             SpawnEnemies();
             time = 15.1;
+            SpawnEnemies();
         }
     }
 
