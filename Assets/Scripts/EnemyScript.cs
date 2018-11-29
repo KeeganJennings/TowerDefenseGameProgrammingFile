@@ -6,13 +6,13 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
 
-    private int health;
+    private int health = 15;
     private float speed = 2f;
     public Transform[] currentSquareToMoveTo;
     private GameObject homeBaseSquare;
     private int currentSquare = 0;
 
-    private Collider enemyCollider = SpawnerScript.Instance.enemies[0].GetComponent<Collider>();
+    private BoxCollider2D enemyCollider;
     
     
 
@@ -20,6 +20,7 @@ public class EnemyScript : MonoBehaviour
     void Start ()
     {
         homeBaseSquare = GameObject.FindGameObjectWithTag("2");
+        enemyCollider = SpawnerScript.Instance.spawnedEnemy.GetComponent<BoxCollider2D>();
     }
 	
 	// Update is called once per frame
@@ -27,14 +28,18 @@ public class EnemyScript : MonoBehaviour
     {
         MoveAlongRoad();
         DestroyAtEndOfRoad();
-	}
+    }
 
-    private void CheckIfDead()
+    private bool CheckIfDead()
     {
+
+        bool dead = false;
         if(health <= 0)
         {
-            
+            dead = true;
         }
+        
+        return dead;
     }
 
     private void MoveAlongRoad()
@@ -59,20 +64,18 @@ public class EnemyScript : MonoBehaviour
 
     private void DestroyAtEndOfRoad()
     {
-        Collider homeBaseCollider = homeBaseSquare.GetComponent<Collider>();
+        BoxCollider2D homeBaseCollider = homeBaseSquare.GetComponent<BoxCollider2D>();
+        bool checkedDead = CheckIfDead();
+        if (checkedDead == false)
+        {
+            if (enemyCollider.bounds.Intersects(homeBaseCollider.bounds))
+            {
+                Destroy(this.gameObject, .5f);
+                health = 0;
+                Debug.Log("Destroyed");
+            }
+            
 
-        if(enemyCollider != null)
-        {
-            Debug.Log("Enemy is fine!");
         }
-        if(homeBaseCollider != null)
-        {
-            Debug.Log("Home base collider is fine!");
-        }
-        if(enemyCollider.bounds.Intersects(homeBaseCollider.bounds))
-        {
-            Destroy(this);
-        }
-        
     }
 }

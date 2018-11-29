@@ -38,7 +38,7 @@ public class TowerBaseManager : Singleton<TowerBaseManager>
         {
             if (mapLayoutText[i] == '0' || mapLayoutText[i] == '1' || mapLayoutText[i] == '2' || mapLayoutText[i] == '3' || mapLayoutText[i] == '4')
             {
-                Debug.Log(mapLayoutText[i]);
+                
                 string s = mapLayoutText[i].ToString();
                 int tile = int.Parse(s);
                 PlaceTiles(tileSize, length, height, worldStart, tile);
