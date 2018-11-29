@@ -29,10 +29,14 @@ public class TowerBaseManager : Singleton<TowerBaseManager>
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
         int length = 0;
         int height = 0;
+        MapLoop(tileSize, worldStart, ref length, ref height);
+    }
 
-        for(int i = 0; i < mapLayoutText.Length; i++)
+    private void MapLoop(float tileSize, Vector3 worldStart, ref int length, ref int height)
+    {
+        for (int i = 0; i < mapLayoutText.Length; i++)
         {
-            if(mapLayoutText[i] == '0' || mapLayoutText[i] == '1' || mapLayoutText[i] == '2' || mapLayoutText[i] == '3' || mapLayoutText[i] == '4')
+            if (mapLayoutText[i] == '0' || mapLayoutText[i] == '1' || mapLayoutText[i] == '2' || mapLayoutText[i] == '3' || mapLayoutText[i] == '4')
             {
                 Debug.Log(mapLayoutText[i]);
                 string s = mapLayoutText[i].ToString();
@@ -40,7 +44,7 @@ public class TowerBaseManager : Singleton<TowerBaseManager>
                 PlaceTiles(tileSize, length, height, worldStart, tile);
 
                 length++;
-                if(length >= 17)
+                if (length >= 17)
                 {
                     height++;
                     length = 0;
@@ -52,6 +56,7 @@ public class TowerBaseManager : Singleton<TowerBaseManager>
     private void PlaceTiles(float tileSize, int i, int j, Vector3 WorldStart, int placeTile)
     {
         GameObject towerBase = Instantiate(startingBlock[placeTile]);
+        towerBase.gameObject.tag = placeTile.ToString();
         towerBase.transform.position = new Vector3(WorldStart.x + (tileSize * i), WorldStart.y - (tileSize * j), 0);
         towerBases.Add(towerBase);
         towerBase.transform.parent = transform;

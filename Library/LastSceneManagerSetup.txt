@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/TowerDefense.unity
+- path: Assets/Scenes/TowerDefenseGameProgrammingFinal.unity
   isLoaded: 1
   isActive: 1
