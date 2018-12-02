@@ -37,7 +37,9 @@ public class EnemyScript : Singleton<EnemyScript>
         if(health <= 0)
         {
             dead = true;
-            Destroy(this);
+            Destroy(this.gameObject, .5f);
+            SpawnerScript.Instance.enemies.Remove(this.gameObject);
+            PlacedTowerScript.Instance.enemies.Remove(this.gameObject);
         }
         
         return dead;
@@ -45,7 +47,8 @@ public class EnemyScript : Singleton<EnemyScript>
 
     public void TakeDamage()
     {
-        health = health - 4;
+        health = health - 6;
+        Debug.Log(health);
     }
 
     private void MoveAlongRoad()

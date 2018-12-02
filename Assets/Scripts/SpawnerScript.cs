@@ -22,8 +22,6 @@ public class SpawnerScript : Singleton<SpawnerScript>
 	void Update ()
     {
         SpawnWavesDelay();
-        
-
     }
 
     private void SpawnWavesDelay()

@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies: []
+  firedProjectiles: []
   projectile: {fileID: 1843238657931050, guid: c487e50264cbf0646af3fe0c35ee10ee, type: 2}
 --- !u!212 &212262923156143500
 SpriteRenderer:
@@ -151,7 +152,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3120d4f4c8ceb5f4b921b23cf3e430a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

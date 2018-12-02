@@ -19,13 +19,14 @@ public class ProjectileScript : MonoBehaviour
         MoveTowardsTheFarthestEnemy();
 	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collider)
     {
         GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
         if(enemy != null)
         {
             EnemyScript.Instance.TakeDamage();
-            Destroy(this);
+            Destroy(this.gameObject, .1f);
+            PlacedTowerScript.Instance.firedProjectiles.RemoveAt(0);
         }
     }
 
