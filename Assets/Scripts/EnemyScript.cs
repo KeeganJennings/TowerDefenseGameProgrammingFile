@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class EnemyScript : Singleton<EnemyScript>
 {
 
-    private int health = 15;
+    private int health = 10;
     private float speed = 2f;
     public Transform[] currentSquareToMoveTo;
     private GameObject homeBaseSquare;
@@ -37,9 +37,15 @@ public class EnemyScript : MonoBehaviour
         if(health <= 0)
         {
             dead = true;
+            Destroy(this);
         }
         
         return dead;
+    }
+
+    public void TakeDamage()
+    {
+        health = health - 4;
     }
 
     private void MoveAlongRoad()
@@ -57,9 +63,6 @@ public class EnemyScript : MonoBehaviour
                 }
             }
         }
-        
-
-        
     }
 
     private void DestroyAtEndOfRoad()
@@ -72,10 +75,9 @@ public class EnemyScript : MonoBehaviour
             {
                 Destroy(this.gameObject, .5f);
                 health = 0;
-                Debug.Log("Destroyed");
-            }
-            
-
+                //Debug.Log("Destroyed");
+                SpawnerScript.Instance.enemies.Remove(this.gameObject);
+            }         
         }
     }
 }

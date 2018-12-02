@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4441252919562172}
   - component: {fileID: 212671841920948552}
   - component: {fileID: 61252280398816036}
+  - component: {fileID: 58671885919240956}
+  - component: {fileID: 114801905473378564}
   m_Layer: 0
   m_Name: BlueTowerPrefab
   m_TagString: Untagged
@@ -41,6 +43,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58671885919240956
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538120869570410}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.6, y: -0.6}
+  serializedVersion: 2
+  m_Radius: 3.5
 --- !u!61 &61252280398816036
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -66,6 +83,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1.2}
   m_EdgeRadius: 0
+--- !u!114 &114801905473378564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538120869570410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e68be9863a9f94499b53a68de8236e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies: []
+  projectile: {fileID: 1843238657931050, guid: c487e50264cbf0646af3fe0c35ee10ee, type: 2}
 --- !u!212 &212671841920948552
 SpriteRenderer:
   m_ObjectHideFlags: 1

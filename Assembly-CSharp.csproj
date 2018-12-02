@@ -64,6 +64,8 @@
     <Compile Include="Assets\Scripts\ButtonManager.cs" />
     <Compile Include="Assets\Scripts\EnemyScript.cs" />
     <Compile Include="Assets\Scripts\GameManager1.cs" />
+    <Compile Include="Assets\Scripts\PlacedTowerScript.cs" />
+    <Compile Include="Assets\Scripts\ProjectileScript.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\SpawnerScript.cs" />
     <Compile Include="Assets\Scripts\TowerBaseManager.cs" />

@@ -6,6 +6,8 @@ public class SpawnerScript : Singleton<SpawnerScript>
 {
     public List<GameObject> enemies = new List<GameObject>();
     private float numberOfEnemiesToSpawn = 15;
+    private float timeWave = 5f;
+    private float timeEnemy = 1f;
     public GameObject spawnedEnemy;
     public GameObject spawnBlock;
     public GameObject enemyPrefab;
@@ -13,49 +15,54 @@ public class SpawnerScript : Singleton<SpawnerScript>
     // Use this for initialization
     void Start ()
     {
-        SpawnEnemies();
+        
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-
+        SpawnWavesDelay();
         
 
     }
 
-    private void SpawnDelay()
+    private void SpawnWavesDelay()
     {
-        var time = 15.1;
+        
 
-        time -= Time.deltaTime;
+        timeWave = timeWave - Time.deltaTime;
 
-        if (time <= 0)
+        if (timeWave <= 0 || timeEnemy != 1f)
         {
-            SpawnEnemies();
-            time = 15.1;
+            SpawnEnemyDelay();
+            timeWave = 5f;
+        }
+        else
+        {
+            //Debug.Log("Waiting to spawn");
+            //Debug.Log(timeWave);
+        }
+    }
+    private void SpawnEnemyDelay()
+    {
+        timeEnemy = timeEnemy - Time.deltaTime;
+
+        if(timeEnemy <= 0)
+        {
+            timeEnemy = .75f;
             SpawnEnemies();
         }
     }
 
     public void SpawnEnemies()
     {
-        float waitBetweenEnemies = 5.0f;
-        float currentTimeBetweenEnemies = 0.0f;
-        for(int i = 0; i < numberOfEnemiesToSpawn; i++)
+        if(enemies.Count <= numberOfEnemiesToSpawn)
         {
-            Debug.Log("In the For Loop");
-            if (currentTimeBetweenEnemies >= waitBetweenEnemies)
-            {
-                spawnedEnemy = Instantiate(enemyPrefab, spawnBlock.transform.position, Quaternion.identity);
-                enemies.Add(spawnedEnemy);
-                currentTimeBetweenEnemies = 0.0f;
-            }
-            else
-            {
-                i--;
-            }
-            currentTimeBetweenEnemies = currentTimeBetweenEnemies + Time.deltaTime;
+            spawnedEnemy = Instantiate(enemyPrefab, spawnBlock.transform.position, Quaternion.identity);
+            enemies.Add(spawnedEnemy);
+            SpawnEnemyDelay();
+            
         }
+        //Debug.Log(enemies.Count);
     }
 }
