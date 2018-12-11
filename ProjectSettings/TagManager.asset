@@ -10,6 +10,9 @@ TagManager:
   - 3
   - 4
   - Enemy
+  - Red
+  - Blue
+  - Yellow
   layers:
   - Default
   - TransparentFX

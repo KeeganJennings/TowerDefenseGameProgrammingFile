@@ -12,21 +12,37 @@ public class ButtonManager : Singleton<ButtonManager> {
     public bool ButtonWasClicked = false;
 
 	// Use this for initialization
-	void Start () {
-		if(RedTowerButton != null)
+	void Start ()
+    {
+        AddRedButton();
+        AddBlueButton();
+        AddYellowButton();
+    }
+
+    private void AddYellowButton()
+    {
+        if (YellowTowerButton != null)
         {
-            Button btn = RedTowerButton.GetComponent<Button>();
-            btn.onClick.AddListener(AddRedTower);
+            Button btn = YellowTowerButton.GetComponent<Button>();
+            btn.onClick.AddListener(AddYellowTower);
         }
+    }
+
+    private void AddBlueButton()
+    {
         if (BlueTowerButton != null)
         {
             Button btn = BlueTowerButton.GetComponent<Button>();
             btn.onClick.AddListener(AddBlueTower);
         }
-        if (YellowTowerButton != null)
+    }
+
+    private void AddRedButton()
+    {
+        if (RedTowerButton != null)
         {
-            Button btn = YellowTowerButton.GetComponent<Button>();
-            btn.onClick.AddListener(AddYellowTower);
+            Button btn = RedTowerButton.GetComponent<Button>();
+            btn.onClick.AddListener(AddRedTower);
         }
     }
 
@@ -49,7 +65,8 @@ public class ButtonManager : Singleton<ButtonManager> {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
 		
 	}
 }

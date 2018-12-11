@@ -6,8 +6,8 @@ using UnityEngine;
 public class EnemyScript : Singleton<EnemyScript>
 {
 
-    private int health = 10;
-    private float speed = 2f;
+    public int health = 10;
+    private float speed = 1.5f;
     public Transform[] currentSquareToMoveTo;
     private GameObject homeBaseSquare;
     private int currentSquare = 0;
@@ -28,6 +28,7 @@ public class EnemyScript : Singleton<EnemyScript>
     {
         MoveAlongRoad();
         DestroyAtEndOfRoad();
+        CheckIfDead();
     }
 
     private bool CheckIfDead()
@@ -36,19 +37,17 @@ public class EnemyScript : Singleton<EnemyScript>
         bool dead = false;
         if(health <= 0)
         {
+            Destroy(this.gameObject, .1f);
             dead = true;
-            Destroy(this.gameObject, .5f);
             SpawnerScript.Instance.enemies.Remove(this.gameObject);
-            PlacedTowerScript.Instance.enemies.Remove(this.gameObject);
         }
-        
         return dead;
     }
 
     public void TakeDamage()
     {
-        health = health - 6;
-        Debug.Log(health);
+        health = health - 3;
+        
     }
 
     private void MoveAlongRoad()
@@ -76,10 +75,8 @@ public class EnemyScript : Singleton<EnemyScript>
         {
             if (enemyCollider.bounds.Intersects(homeBaseCollider.bounds))
             {
-                Destroy(this.gameObject, .5f);
+                GameManager1.Instance.SubtractHealth();
                 health = 0;
-                //Debug.Log("Destroyed");
-                SpawnerScript.Instance.enemies.Remove(this.gameObject);
             }         
         }
     }

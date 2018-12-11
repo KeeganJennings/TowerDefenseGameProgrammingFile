@@ -1,37 +1,72 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
 
-    private float speed = 1f;
+    private float speed = 10f;
+    private BoxCollider2D enemyCollider;
+    private CircleCollider2D towerCollider;
 
 	// Use this for initialization
 	void Start ()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        MoveTowardsTheFarthestEnemy();
+        towerCollider = this.transform.parent.GetComponent<PlacedTowerScript>().GetComponent<CircleCollider2D>();
 	}
 
-    private void OnTriggerEnter(Collider collider)
+    // Update is called once per frame
+    void Update()
     {
-        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
-        if(enemy != null)
+        MoveTowardsTheFarthestEnemy();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        for (int i = 0; i < PlacedTowerScript.Instance.enemies.Count; i++)
         {
-            EnemyScript.Instance.TakeDamage();
-            Destroy(this.gameObject, .1f);
-            PlacedTowerScript.Instance.firedProjectiles.RemoveAt(0);
+            if (PlacedTowerScript.Instance.enemies[i] != null)
+            {
+                enemyCollider = PlacedTowerScript.Instance.enemies[i].GetComponent<BoxCollider2D>();
+                if (towerCollider.bounds.Intersects(enemyCollider.bounds))
+                {
+                    if (enemyCollider.bounds.Intersects(this.GetComponent<CircleCollider2D>().bounds))
+                    {
+                        this.transform.parent.GetComponent<PlacedTowerScript>().enemies[i].gameObject.GetComponent<EnemyScript>().TakeDamage();
+                        this.transform.parent.GetComponent<PlacedTowerScript>().firedProjectiles.Remove(this.gameObject);
+                        Destroy(this.gameObject, .1f);
+                        i = PlacedTowerScript.Instance.enemies.Count + 1;
+                    }
+                }
+                else
+                {
+                    Destroy(this.gameObject, .1f);
+                }
+            }
         }
     }
 
     private void MoveTowardsTheFarthestEnemy()
     {
-        this.transform.position = Vector2.MoveTowards(PlacedTowerScript.Instance.enemies[1].transform.position, this.transform.position, speed * Time.deltaTime);
+        int MoveTowardsThisEnemy = 0;
+        for(int i = 0; i < PlacedTowerScript.Instance.enemies.Count; i++)
+        {
+            if(PlacedTowerScript.Instance.enemies[i] != null)
+            {
+                MoveTowardsThisEnemy = i;
+                i = PlacedTowerScript.Instance.enemies.Count + 1;
+            }
+        }
+
+        if(PlacedTowerScript.Instance.enemies[MoveTowardsThisEnemy] != null)
+        {
+            this.transform.position = Vector2.MoveTowards(this.transform.position, PlacedTowerScript.Instance.enemies[MoveTowardsThisEnemy].transform.position, speed * Time.deltaTime);
+        }
+        else
+        {
+            Destroy(this.gameObject, .1f);
+        }
     }
 }

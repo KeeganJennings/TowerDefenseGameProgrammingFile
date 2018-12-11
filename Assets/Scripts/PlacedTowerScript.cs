@@ -9,6 +9,9 @@ public class PlacedTowerScript : Singleton<PlacedTowerScript>
     public  List<GameObject> firedProjectiles = new List<GameObject>();
     public GameObject projectile;
     private float cooldown = 1f;
+    private float timeToAttack = 3f;
+    private float nextAttack = 0f;
+    
 
 	// Use this for initialization
 	void Start ()
@@ -19,12 +22,13 @@ public class PlacedTowerScript : Singleton<PlacedTowerScript>
 	// Update is called once per frame
 	void Update ()
     {
-        RemoveEmptyPlaces();
+        RemoveEmptyEnemies();
+        RemoveEmptyProjectiles();
     }
 
     private void CheckForAttack()
     {
-        if (enemies.Count > 1)
+        if (enemies.Count >= 1)
         {
             Attack();
         }
@@ -32,12 +36,10 @@ public class PlacedTowerScript : Singleton<PlacedTowerScript>
 
     private void Attack()
     {
-        if (firedProjectiles.Count <= 1 && cooldown <= 0)
+        if (firedProjectiles.Count <= 0 && nextAttack >= timeToAttack)
         {
             firedProjectiles.Add(Instantiate(projectile, this.transform.position, Quaternion.identity, this.gameObject.transform));
-            enemies[0].GetComponent<EnemyScript>().TakeDamage();
-            firedProjectiles.Add(projectile);
-            cooldown = .5f;
+            nextAttack = 0f; 
         }
         else
         {
@@ -46,53 +48,56 @@ public class PlacedTowerScript : Singleton<PlacedTowerScript>
         
     }
 
-    private void RemoveEmptyPlaces()
+    private void RemoveEmptyEnemies()
     {
         for (int i = 0; i < enemies.Count; i++)
         {
             if (enemies[i] == null)
             {
-                enemies.RemoveAt(i);
+                if(enemies.Count >= 2)
+                {
+                    enemies.RemoveAt(i);
+                }
+            }
+        }
+    }
+
+    private void RemoveEmptyProjectiles()
+    {
+        if(firedProjectiles.Count >= 1)
+        {
+            if (firedProjectiles[0] == null)
+            {
+                firedProjectiles.Clear();
             }
         }
     }
 
     private void AttackCooldown()
     {
-        cooldown = cooldown - Time.deltaTime;
-
-        if(cooldown <= 0)
+        if(timeToAttack > nextAttack)
         {
-            Attack();
-        }
-        else
-        {
-            Debug.Log("Cooldown: " + cooldown);
+            nextAttack = cooldown + nextAttack;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D enemiesCollider)
     {
-        //Debug.Log("OnTriggerStay");
         GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
         if(enemy != null)
         {
             enemies.Add(enemy.gameObject);
+            CheckForAttack();
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        CheckForAttack();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
-        if(enemy != null)
+        if (enemy != null)
         {
             enemies.Remove(enemy.gameObject);
         }
-             
+
     }
 }

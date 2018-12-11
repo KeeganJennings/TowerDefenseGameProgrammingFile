@@ -59,8 +59,6 @@ public class SpawnerScript : Singleton<SpawnerScript>
             spawnedEnemy = Instantiate(enemyPrefab, spawnBlock.transform.position, Quaternion.identity);
             enemies.Add(spawnedEnemy);
             SpawnEnemyDelay();
-            
         }
-        //Debug.Log(enemies.Count);
     }
 }

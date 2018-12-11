@@ -73,7 +73,6 @@ public class TowerBaseManager : Singleton<TowerBaseManager>
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, -Vector2.up);
 
-        
         if (hit.collider != null)
         {
             for (int i = 0; i < towerBases.Count; i++)
