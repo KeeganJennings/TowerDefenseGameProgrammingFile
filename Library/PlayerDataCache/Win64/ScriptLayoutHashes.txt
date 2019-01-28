@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/Keegan Jennings/Documents/TowerDefenseGameProgrammingFinal.exe
+C:/Users/Keegan Jennings/Documents/GitHub/TowerDefenseGameProgrammingFile/FINAL BUILD/TowerDefenseGameProgrammingFinal.exe
 SceneListBegin?
 Assets/Scenes/TowerDefenseGameProgrammingFinal.unity
 SceneListEnd?

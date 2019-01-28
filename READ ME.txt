@@ -1,0 +1,11 @@
+How To Play:
+
+Left Click on Black Squares to bring up the menu to place a tower. 
+Right Click anywhere to close the tower menu. 
+Click on what tower you want, and then click on what black square you want to place it on. 
+
+Title:
+Broken Road Defense
+
+Genre:
+Strategy
